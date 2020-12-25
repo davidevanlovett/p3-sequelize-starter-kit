@@ -1,7 +1,7 @@
 // Requiring our models and passport as we've configured it
-const db = require("../models");
+const db = require('../models');
 
-const router = require("express").Router();
+const router = require('express').Router();
 
 // router.post("/login", passport.authenticate("local"), function(req, res) {
 //   // Sending back a password, even a hashed password, isn't a good idea

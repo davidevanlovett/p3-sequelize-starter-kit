@@ -1,10 +1,10 @@
 // Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
   const User = sequelize.define(
-    "User",
+    'User',
     {
       // The email cannot be null, and must be a proper email before creation
       email: {
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       // This forces any default 'User' to exclude the password when we query them;
       // this way we don't expose even a hashed password
       defaultScope: {
-        attributes: { exclude: ["password"] }
+        attributes: { exclude: ['password'] }
       },
       // If you want to show the password, for whatever reason, we expose with:
       // db.User.scope('withPassword').findAll() etc
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
-  User.addHook("beforeCreate", function(user) {
+  User.addHook('beforeCreate', function(user) {
     user.password = bcrypt.hashSync(
       user.password,
       bcrypt.genSaltSync(10),
@@ -54,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating User with Posts
     // When an User is deleted, also delete any associated Posts
     User.hasMany(models.Post, {
-      onDelete: "cascade"
+      onDelete: 'cascade'
     });
   };
 
