@@ -2,9 +2,6 @@ require("dotenv").config();
 
 // Requiring necessary npm packages
 const express = require("express");
-const session = require("express-session");
-// Requiring passport as we've configured it
-const passport = require("./config/passport");
 
 // Requiring our routes
 const routes = require("./controllers");
@@ -20,23 +17,23 @@ const morgan = require("morgan");
 const app = express();
 
 // Set up our middleware!
-app.use(morgan("dev"));
+// Dev Logging. Only works in test or development
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-// We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 
-// Set up handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-// Add all our routes
+// Add all our backend routes
 app.use(routes);
+
+// Send all other requests to react app
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 
 let config = { force: false };
 if (process.env.NODE_ENV === "test") {
@@ -53,10 +50,6 @@ db.sequelize.sync(config).then(function() {
     );
   }
   app.listen(PORT, function() {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+    console.log(`Server now on port ${PORT}!`);
   });
 });

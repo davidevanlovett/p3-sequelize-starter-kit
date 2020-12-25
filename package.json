@@ -1,5 +1,5 @@
 {
-  "name": "project-2-starter-code",
+  "name": "project-3-sequelize-starter-code",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -16,11 +16,11 @@
     "bcryptjs": "2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.0",
-    "express-session": "^1.16.1",
+    "express-jwt": "^6.0.0",
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^1.6.5",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
     "sequelize": "^5.8.6"
   },
   "devDependencies": {

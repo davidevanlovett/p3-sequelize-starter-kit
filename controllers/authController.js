@@ -1,6 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
-const passport = require("../config/passport");
+const passport = require("../utils/passport");
 const router = require("express").Router();
 
 router.post("/login", passport.authenticate("local"), function(req, res) {
