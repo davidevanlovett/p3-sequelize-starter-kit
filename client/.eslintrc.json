@@ -1,11 +1,5 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 2018
-  },
-  "env": {
-    "es6": true,
-    "node": true
-  },
+  "extends": "react-app",
   "rules": {
     "no-duplicate-case": "error",
     "no-empty": "error",
@@ -20,26 +14,22 @@
     "no-multi-spaces": "error",
     "no-mixed-spaces-and-tabs": "error",
     "no-multiple-empty-lines":"error",
-    "no-trailing-spaces": "error",
-    "default-case": "error",
-    "no-fallthrough": "error",
     "no-unused-vars": "error",
     "no-var": "error",
-    "no-use-before-define": "error",
-    "no-redeclare": "error",
     "camelcase": "error",
-    "brace-style": "error",
     "indent": [
-      "error",
+      "error", 
       2
     ],
     "quotes": [
-      "error",
+      "error", 
       "single"
     ],
     "semi": [
-      "error",
+      "error", 
       "always"
-    ]
+    ],
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error"
   }
 }

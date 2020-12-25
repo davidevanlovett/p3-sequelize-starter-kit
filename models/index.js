@@ -8,8 +8,9 @@ const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV;
 const prodDb = process.env.JAWSDB_URL;
 const localDb = process.env.LOCALDB_URL;
-const db = {};
 const sequelize = new Sequelize(env === 'production' ? prodDb : localDb);
+
+const db = {};
 
 fs
   .readdirSync(__dirname)
