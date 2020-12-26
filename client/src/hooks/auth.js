@@ -15,7 +15,7 @@ const useAuth = () => {
             .then(res => {
                 setToken(res.data.token);
                 setUser(res.data.user);
-                axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+                axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 return res;
             });
     };
@@ -26,7 +26,7 @@ const useAuth = () => {
             .then(res => {
                 setToken(res.data.token);
                 setUser(res.data.user);
-                axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+                axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
                 return res;
             });
     };
@@ -41,10 +41,7 @@ const useAuth = () => {
 
     const isTokenExpired = () => {
         try {
-            console.log(token);
             const decoded = jwtDecode(token);
-            console.log(decoded);
-            console.log(new Date(decoded.exp * 1000),new Date(decoded.iat * 1000));
             if (decoded.exp < Date.now() / 1000) {
                 return true;
             }
@@ -62,7 +59,6 @@ const useAuth = () => {
     };
 
     const isLoggedIn = () => {
-        console.log(token, isTokenExpired());
         return token !== undefined && token !== '' && !isTokenExpired();
     };
 

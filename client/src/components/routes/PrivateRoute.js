@@ -1,12 +1,13 @@
 import { Route, Redirect } from 'react-router-dom';
-import { isLoggedIn } from '../../utils/auth';
+import useAuth from '../../hooks/auth';
 
 function PrivateRoute(props){
+    const {isLoggedIn} = useAuth();
     if(isLoggedIn()){
         return <Route {...props}/>;
     }
     else{
-        return <Redirect to="/signup" />;
+        return <Redirect to="/login" />;
     }
 }
 

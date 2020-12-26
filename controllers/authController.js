@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await db.User.scope('withPassword').findOne({ email });
+        const user = await db.User.scope('withPassword').findOne({ where: {email:email }});
         if (!user) {
             return res.status(401).json({ message: 'User not found' });
         }
@@ -21,7 +21,10 @@ router.post('/login', async (req, res) => {
         const token = await signAsync(
             { id: user.id, email: user.email },
             process.env.SECRET,
-            { expiresIn: '24h' }
+            {
+                expiresIn: '24h',
+                algorithm: 'HS256'
+            }
         );
         res.json({
             token, user: {
@@ -30,6 +33,7 @@ router.post('/login', async (req, res) => {
             }
         });
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 });
@@ -49,7 +53,10 @@ router.post('/signup', async (req, res) => {
         const token = await signAsync(
             { id: user.id, email: user.email },
             process.env.SECRET,
-            { expiresIn: '24h'}
+            {
+                expiresIn: '24h',
+                algorithm: 'HS256'
+            }
         );
         res.json({
             token, user: {
@@ -58,6 +65,7 @@ router.post('/signup', async (req, res) => {
             }
         });
     } catch (err) {
+        console.error(err);
         res.status(500).json(err);
     }
 });

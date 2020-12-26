@@ -24,8 +24,6 @@ const styles = {
 
 const Navbar = () => {
     const { isLoggedIn, logout } = useAuth();
-
-    console.log(isLoggedIn());
     return (
         <div>
             <ul style={styles.ul}>
@@ -33,6 +31,7 @@ const Navbar = () => {
                 {isLoggedIn() ?
                     <>
                         <li style={styles.li}><Link style={styles.link} onClick={() => logout()} to='/'>Logout</Link></li>
+                        <li style={styles.li}><Link style={styles.link} to='/posts'>Posts</Link></li>
                     </>
                     :
                     <>

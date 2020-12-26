@@ -1,10 +1,10 @@
 const db = require('../models');
 const router = require('express').Router();
-
+const isAuthenticated = require('../utils/middleware').isAuthenticated;
 /**
  * Post - Read All
  */
-router.get('/', function(req, res) {
+router.get('/', isAuthenticated,function(req, res) {
     db.Post.findAll(req.query)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
