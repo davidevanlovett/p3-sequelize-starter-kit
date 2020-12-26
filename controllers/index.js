@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const apiRoutes = require('./api');
-const authRoutes = require('./authController');
 
-// Auth Routes
-router.use('/auth', authRoutes);
+// Import our controllers
+const postRoutes = require('./postsController');
+const userRoutes = require('./usersController');
+const authRoutes = require('.//authController');
 
-// API Routes
-router.use('/api', apiRoutes);
+// Hook up to the router
+router.use('/api/posts', postRoutes);
+router.use('/api/users', userRoutes);
+router.use('/api/auth', authRoutes);
 
-
+// Export the router
 module.exports = router;

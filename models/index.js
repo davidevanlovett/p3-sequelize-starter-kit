@@ -13,20 +13,20 @@ const sequelize = new Sequelize(env === 'production' ? prodDb : localDb);
 const db = {};
 
 fs
-  .readdirSync(__dirname)
-  .filter(function(file) {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(function(file) {
+    .readdirSync(__dirname)
+    .filter(function(file) {
+        return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    })
+    .forEach(function(file) {
     // eslint-disable-next-line dot-notation
-    const model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
+        const model = sequelize['import'](path.join(__dirname, file));
+        db[model.name] = model;
+    });
 
 Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
 });
 
 db.sequelize = sequelize;
