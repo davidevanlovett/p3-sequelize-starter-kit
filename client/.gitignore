@@ -12,6 +12,7 @@
 /build
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
@@ -25,3 +26,6 @@ yarn-error.log*
 # for easier use during projects, disabling locks
 package-lock.json
 yarn.lock
+
+# ignoring the cache to be nicer
+.eslintcache
