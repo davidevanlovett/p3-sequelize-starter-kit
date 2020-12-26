@@ -33,8 +33,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
-
+app.use(express.static('client/build'));
 // Add all our backend routes
 app.use(routes);
 
