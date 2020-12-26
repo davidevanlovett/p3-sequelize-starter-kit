@@ -1,36 +1,39 @@
 import Navbar from './components/Navbar';
+import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/routes/PrivateRoute';
+import axios from 'axios';
+import useAuth from './hooks/auth';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Posts from './pages/Posts';
-import PrivateRoute from './components/routes/PrivateRoute';
-import './App.css';
+import Notes from './pages/Notes';
 
 
 function App() {
+    // Pull auth token from storage, in case you refresh the page
+    const { getToken} = useAuth();
+    axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`;
+
     return (
         <Router>
             <Navbar />
             <Switch>
-                {/* <Route path="/about">
-                  <About />
-                </Route>
-                <Route path="/users">
-                  <Users />
-                </Route> */}
-                <Route exact path="/">
+                <Route exact path='/'>
                     <Home />
                 </Route>
-                <Route path="/signup">
+                <Route path='/signup'>
                     <Signup />
                 </Route>
-                <Route path="/login">
+                <Route path='/login'>
                     <Login />
                 </Route>
-                <PrivateRoute path="/posts">
-                    <Posts />
+                <PrivateRoute exact path='/notes'>
+                    <Notes />
                 </PrivateRoute>
+                {/* <PrivateRoute exact path='/notes/:id'>
+                    <Posts />
+                </PrivateRoute> */}
             </Switch>
         </Router>
     );

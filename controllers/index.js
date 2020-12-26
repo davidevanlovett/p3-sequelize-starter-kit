@@ -1,12 +1,12 @@
 const router = require('express').Router();
 
 // Import our controllers
-const postRoutes = require('./postsController');
+const noteRoutes = require('./notesController');
 const userRoutes = require('./usersController');
-const authRoutes = require('.//authController');
+const authRoutes = require('./authController');
 
 // Hook up to the router
-router.use('/api/posts', postRoutes);
+router.use('/api/notes', noteRoutes);
 router.use('/api/users', userRoutes);
 router.use('/api/auth', authRoutes);
 

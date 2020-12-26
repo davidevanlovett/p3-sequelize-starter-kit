@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const Post = sequelize.define('Post', {
+    const Note = sequelize.define('Note', {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -14,15 +14,15 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    Post.associate = function (models) {
-    // We're saying that a Post should belong to an User
-    // A Post can't be created without an User due to the foreign key constraint
-        Post.belongsTo(models.User, {
+    Note.associate = function (models) {
+    // We're saying that a Note should belong to an User
+    // A Note can't be created without an User due to the foreign key constraint
+        Note.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
 
-    return Post;
+    return Note;
 };

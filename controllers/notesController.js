@@ -2,29 +2,29 @@ const db = require('../models');
 const router = require('express').Router();
 const isAuthenticated = require('../utils/middleware').isAuthenticated;
 /**
- * Post - Read All
+ * Note - Read All
  */
-router.get('/', isAuthenticated,function(req, res) {
-    db.Post.findAll(req.query)
+router.get('/', isAuthenticated, function(req, res) {
+    db.Note.findAll(req.query)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
 
 /**
- * Post - Read One
+ * Note - Read One
  */
 router.get('/:id', function(req, res) {
-    db.Post.findByPk(req.params.id)
+    db.Note.findByPk(req.params.id)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
 
 /**
- * Post - Create
+ * Note - Create
  * Notice how we are also taking in the User Id! Important!
  */
-router.post('/', function(req, res) {
-    db.Post.create({
+router.post('/', isAuthenticated, function(req, res) {
+    db.Note.create({
         UserId: req.user.id,
         ...req.body
     })
@@ -33,19 +33,19 @@ router.post('/', function(req, res) {
 });
 
 /**
- * Post - Update
+ * Note - Update
  */
 router.put('/:id', function(req, res) {
-    db.Post.update(req.body, { where: { id: req.params.id }})
+    db.Note.update(req.body, { where: { id: req.params.id }})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
 
 /**
- * Post - Delete
+ * Note - Delete
  */
 router.delete('/:id', function(req, res) {
-    db.Post.destroy({ where: { id: req.params.id }})
+    db.Note.destroy({ where: { id: req.params.id }})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });

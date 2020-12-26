@@ -1,22 +1,33 @@
-import { Link, Redirect, useHistory } from 'react-router-dom';
-import useInput from 'react-hanger/useInput';
+import { useState } from 'react';
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/auth';
 
 const Signup = () => {
-    const {signup,isLoggedIn} = useAuth();
+    const { signup, isLoggedIn } = useAuth();
     const history = useHistory();
-    const email = useInput('');
-    const password = useInput('');
+    const location = useLocation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [redirectToLogin, toggleRedirect] = useState(false);
+    const { from } = location.state || { from: { pathname: '/' } };
 
     const handleSubmit = event => {
         event.preventDefault();
-        signup(email.value,password.value).then(res => {
-            history.push('/');
+        signup(email, password).then(res => {
+            history.replace(from);
         });
     };
 
     if (isLoggedIn()) {
-        return <Redirect to="/" />;
+        return <Redirect to={location.state || '/'} />;
+    }
+
+    if (redirectToLogin) {
+        return <Redirect to={{
+            pathname: '/login',
+            state: { from: from }
+        }}
+        />;
     }
 
     return (
@@ -25,26 +36,32 @@ const Signup = () => {
                 Signup Page
             </h2>
             <form onSubmit={handleSubmit}>
+                <label htmlFor='email'>Email:</label>
                 <input
                     name='email'
                     placeholder='Email'
                     type='email'
                     autoComplete='username'
-                    {...email.eventBind}
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
                 />
+                <br />
+                <label htmlFor='password'>Password:</label>
                 <input
                     name='password'
                     placeholder='Password'
                     type='password'
                     autoComplete='password'
-                    {...password.eventBind}
+                    value={password}
+                    onChange={event => setPassword(event.target.value)}
                 />
+                <br />
                 <button type='submit'>Signup</button>
             </form>
             <p>
-            Already have an account? <Link to='/login'>Login Here</Link>
+                Already have an account? <button onClick={() => toggleRedirect(true)}>Login Here</button>
             </p>
-            
+
         </div>
     );
 };

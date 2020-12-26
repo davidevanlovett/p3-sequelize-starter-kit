@@ -58,6 +58,10 @@ const useAuth = () => {
         return jwtDecode(token);
     };
 
+    const getToken = () => {
+        return token;
+    };
+
     const isLoggedIn = () => {
         return token !== undefined && token !== '' && !isTokenExpired();
     };
@@ -69,7 +73,8 @@ const useAuth = () => {
         user,
         getProfile,
         isLoggedIn,
-        signup
+        signup,
+        getToken
     };
 };
 
