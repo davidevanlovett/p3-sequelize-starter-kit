@@ -7,7 +7,7 @@ module.exports = function () {
         throw new Error('Invalid Secret supplied in env. Good Secret required.');
     } else if (process.env.NODE_ENV === 'production' && (process.env.JAWSDB_URL === undefined || process.env.JAWSDB_URL === '')) {
         throw new Error('Production database not properly configured. Supply a URL');
-    } else if (process.env.LOCALDB_URL === undefined || process.env.LOCALDB_URL === '') {
+    } else if (process.env.NODE_ENV === 'production' || (process.env.LOCALDB_URL === undefined || process.env.LOCALDB_URL === '')) {
         throw new Error('No connection URL supplied for local DB');
     }
 };
