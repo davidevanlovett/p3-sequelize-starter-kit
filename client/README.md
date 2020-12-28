@@ -19,6 +19,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - Configure the server correctly.
 - Go!
 
+For now, the application is a simple note taker with authentication.
+
 ## Opinions 
 
 - ESlint hard mode. Will fail to compile if lint errors found.
