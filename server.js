@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 // Configuration check.
+// Disable this at your own risk
 require('./utils/verifyConfiguration')();
 
 // Requiring necessary npm packages
@@ -13,8 +14,9 @@ const PORT = process.env.PORT || 3001;
 const db = require('./models');
 // Bringing in Morgan, a nice logger for our server
 const morgan = require('morgan');
+// Compression
 const compression = require('compression');
-// Creating express app and configuring middleware needed for authentication
+// Creating express app
 const app = express();
 
 // Set up our middleware!
@@ -30,6 +32,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
+
 // Add all our backend routes
 app.use(routes);
 
@@ -38,14 +41,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
-
-let config = { force: false };
-if (process.env.NODE_ENV === 'test') {
-    config.force = true;
-}
-// if we need it! {force:true}
-// Syncing our database and logging a message to the user upon success
-db.sequelize.sync(config).then(function () {
+db.sequelize.sync({force:false}).then(function () {
     if (process.env.NODE_ENV === 'test') {
         db.User.create({ email: 'test@test.com', password: 'password' }).then(
             () => {

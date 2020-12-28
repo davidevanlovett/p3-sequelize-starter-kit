@@ -21,7 +21,7 @@ const Notes = function () {
     return (
         <div>
             <h2>Notes</h2>
-            <ul>
+            <ol>
                 {notes.map(note => {
                     return (
                         <li key={note.id}>
@@ -29,7 +29,7 @@ const Notes = function () {
                         </li>
                     );
                 })}
-            </ul>
+            </ol>
             <NoteForm didSubmit={refreshParent} />
         </div>
     );

@@ -5,6 +5,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
 
+// removing config.json, since it blows things up.
 const env = process.env.NODE_ENV;
 const prodDb = process.env.JAWSDB_URL;
 const localDb = process.env.LOCALDB_URL;
@@ -18,8 +19,8 @@ fs
         return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
     })
     .forEach(function(file) {
-    // eslint-disable-next-line dot-notation
-        const model = sequelize['import'](path.join(__dirname, file));
+        // Sequelize 6.0 deprecated import, fixing that.
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
         db[model.name] = model;
     });
 

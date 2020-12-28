@@ -66,7 +66,6 @@ const useAuth = () => {
         return token !== undefined && token !== '' && !isTokenExpired();
     };
 
-
     return {
         login,
         logout,

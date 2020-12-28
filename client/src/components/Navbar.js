@@ -11,8 +11,8 @@ const Navbar = () => {
                 <li><Link to='/notes'>Notes</Link></li>
                 {isLoggedIn() ?
                     <>
-                        <li><Link onClick={() => logout()} to='/'>Logout</Link></li>
                         <li>Hello, {getProfile().email}</li>
+                        <li><Link onClick={() => logout()} to='/'>Logout</Link></li>
                     </>
                     :
                     <>

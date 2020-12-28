@@ -31,9 +31,6 @@ function App() {
                 <PrivateRoute exact path='/notes'>
                     <Notes />
                 </PrivateRoute>
-                {/* <PrivateRoute exact path='/notes/:id'>
-                    <Posts />
-                </PrivateRoute> */}
             </Switch>
         </Router>
     );
