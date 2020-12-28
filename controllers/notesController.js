@@ -5,6 +5,7 @@ const isAuthenticated = require('../utils/middleware').isAuthenticated;
  * Note - Read All
  */
 router.get('/', isAuthenticated, function(req, res) {
+    // we can pass in things in the query of a REST call!
     db.Note.findAll(req.query)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));

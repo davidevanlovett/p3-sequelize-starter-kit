@@ -4,11 +4,14 @@ import useAuth from '../hooks/auth';
 
 const Login = () => {
     const { login, isLoggedIn } = useAuth();
+    // History and location are hooks we can use to manipulate our page's history!
     const history = useHistory();
     const location = useLocation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // For our redirector
     const [redirectToSignup, toggleRedirect] = useState(false);
+    // This is the key part to our redirector. We can pull the prior location out here, if it exists
     const { from } = location.state || { from: { pathname: '/' } };
 
     const handleSubmit = event => {
@@ -24,6 +27,7 @@ const Login = () => {
 
     if (redirectToSignup) {
         return <Redirect to={{
+            // If someone goes to signup, this transfers the redirect
             pathname: '/signup',
             state: { from: from }
         }}
@@ -45,7 +49,7 @@ const Login = () => {
                     value={email}
                     onChange={event => setEmail(event.target.value)}
                 />
-                <br/>
+                <br />
                 <label htmlFor='password'>Password:</label>
                 <input
                     name='password'

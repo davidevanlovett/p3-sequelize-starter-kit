@@ -52,7 +52,7 @@ function App() {
     );
 }
 
-
+// Yanked straight from the react-router docs for redirects
 function PrivateRoute({ children, ...rest }) {
     const { isLoggedIn } = useAuth();
     return (

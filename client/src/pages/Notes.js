@@ -10,10 +10,13 @@ const Notes = function () {
         toggleRefresh(refresh + 1);
     };
 
+    // Notice deps has refresh in there - this way when it increments from someone submitting
+    // it calls fetch notes again.
     useEffect(() => {
         fetchNotes();
     }, [refresh]);
 
+    // Check out that include!
     async function fetchNotes() {
         const { data } = await axios.get('/api/notes?include=User');
         setNotes(data);
