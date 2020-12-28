@@ -26,3 +26,5 @@ yarn-error.log*
 # for easier use during projects, disabling locks
 package-lock.json
 yarn.lock
+
+/.vscode
