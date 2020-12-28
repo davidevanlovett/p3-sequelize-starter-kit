@@ -1,7 +1,6 @@
-# Project 3 Starter Kit
+# Project 3 Starter Kit - Server
 
 The Project 3 Starter Kit is a highly opinionated, preconfigured MVC-style full-stack application intended to satisfy the stated requirements and additional requirements of Project 3. It comes with a prerolled authentication system, some cleanup from the project 2 starter, and eslint configuration.
-
 
 ## What this README explains.
 
@@ -16,7 +15,6 @@ These instructions will get you a copy of the project up and running on your loc
 - git ignored .lock files, for ease of collaboration 
 - git ignored vscode files, for ease of collaboration
 - git ignored eslint cache, for ease of collaboration
-- JWTs on the client side are stored with the use-persisted-state hook. Not ideal, IMO, but easier to handle and use 
 - Configuration is checked, and throws errors on improper config supplied.
 
 ### Prerequisites
@@ -66,7 +64,7 @@ It has one connection, a mysql URL to the local database. You can export this fr
 mysql://root:<password>@localhost:3306/<database>
 ```
 
-You will also need to put in a SECRET of at least 10 characters, for the tokens for authentication to be generated.
+You will also need to put in a SECRET of at least 10 characters, for the tokens for authentication to be generated. If you change this ever, you will need to clean out your local storages! 
 
 You will also need to specify the NODE_ENV, so for local work, set it to development as above.
 
@@ -76,7 +74,7 @@ Once you have down that; you are ready to run the server, with:
 npm run dev
 ```
 
-## Commands
+## Available Scripts
 
 In the server:
 ```
@@ -106,7 +104,7 @@ Currently, the application has no tests, barring lint. Travis settings preconfig
 The structure of the server application, as produced, is replicated below, with folders marked with ```-``` and files marked with ```*```. Below this, please find the detailed description of each file and what it is doing. 
 
 ```
-- client - see below in Client structure
+- client - see in Client readme
 - controllers
     * authController.js
     * index.js

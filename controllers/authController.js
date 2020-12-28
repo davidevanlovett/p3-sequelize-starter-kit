@@ -12,11 +12,11 @@ router.post('/login', async (req, res) => {
 
         const user = await db.User.scope('withPassword').findOne({ where: {email:email }});
         if (!user) {
-            res.status(401).send('User not found.');
+            res.status(400).send('User not found.');
         }
         const isGoodPassword = await user.validPassword(password);
         if (!isGoodPassword) {
-            res.status(401).send('Invalid Password.');
+            res.status(400).send('Invalid Password.');
         }
         const token = await signAsync(
             { id: user.id, email: user.email },
@@ -48,7 +48,7 @@ router.post('/signup', async (req, res) => {
             password
         });
         if (!user) {
-            res.status(401).send('Cannot create user.');
+            res.status(400).send('Cannot create user.');
         }
         const token = await signAsync(
             { id: user.id, email: user.email },
