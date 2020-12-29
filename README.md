@@ -164,7 +164,7 @@ Add the model to the ```models``` folder. The ```index.js``` file generated from
 Based on the model, you need to: 
 - Create a ```modelController``` in the ```controllers/api``` folder. 
 - Add all routes you need. 
-- Register the controller in the ```controllers/api/index.js``` file. 
+- Register the controller in the ```controllers/index.js``` file. 
 
 ### I want to add a page
 
