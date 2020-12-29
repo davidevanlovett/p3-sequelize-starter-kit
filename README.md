@@ -162,7 +162,7 @@ Add the model to the ```models``` folder. The ```index.js``` file generated from
 ### I want to add an API controller to expose data
 
 Based on the model, you need to: 
-- Create a ```modelController``` in the ```controllers/api``` folder. 
+- Create a ```modelController``` in the ```controllers``` folder. 
 - Add all routes you need. 
 - Register the controller in the ```controllers/index.js``` file. 
 
